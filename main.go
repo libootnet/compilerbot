@@ -11,9 +11,7 @@ import (
 )
 
 var (
-	GuildID        string
-	BotToken       string
-	RemoveCommands bool
+	BotToken string
 )
 
 func main() {
