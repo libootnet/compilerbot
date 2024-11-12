@@ -59,22 +59,22 @@ func CreateVM(id, images, extension string) (string, error) {
 	}
 
 	hostConfig := &container.HostConfig{
-		NetworkMode: "none",
-		Privileged:  false,
-		// ReadonlyRootfs: true,
+		NetworkMode:    "none",
+		Privileged:     false,
+		ReadonlyRootfs: true,
 		Mounts: []mount.Mount{
 			{
 				Type:   mount.TypeBind,
 				Source: dir + "/scripts",
 				Target: "/scripts",
 			},
-			/*{
+			{
 				Type:   mount.TypeTmpfs,
 				Target: "/tmp",
 				TmpfsOptions: &mount.TmpfsOptions{
 					Mode: 1777,
 				},
-			},*/
+			},
 		},
 	}
 
