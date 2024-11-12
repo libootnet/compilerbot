@@ -34,7 +34,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
-			output, err := src.CreateVM(sha256, LanguageTypes[language])
+			output, err := src.CreateVM(sha256, LanguageTypes[language], language)
 			if err != nil {
 				fmt.Println(err)
 				return

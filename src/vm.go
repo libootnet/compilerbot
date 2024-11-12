@@ -12,7 +12,7 @@ import (
 	"github.com/docker/docker/client"
 )
 
-func CreateVM(id, images string) (string, error) {
+func CreateVM(id, images, extension string) (string, error) {
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
 		return "", err
@@ -42,10 +42,14 @@ func CreateVM(id, images string) (string, error) {
 		return "", err
 	}
 
+	path := "/scripts/" + id + "." + extension
+
+	command := Methods(extension, path)
+
 	config := &container.Config{
 		// Image: "python:3.9",
 		Image: LanguageType(images),
-		Cmd:   []string{"python", "/scripts/" + id + ".py"},
+		Cmd:   command,
 		Tty:   true,
 	}
 
