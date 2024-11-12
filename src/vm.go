@@ -46,9 +46,6 @@ func CreateVM(id, images, extension string) (string, error) {
 
 	command := Methods(extension, path)
 
-	os.Setenv("GOTMPDIR", "/tmp/go-tmp")
-	os.Setenv("GOCACHE", "/tmp/go-cache")
-
 	config := &container.Config{
 		// Image: "python:3.9",
 		Image: LanguageType(images),
