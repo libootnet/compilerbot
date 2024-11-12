@@ -62,10 +62,10 @@ func CreateVM(id, images, extension string) (string, error) {
 		ReadonlyRootfs: true,
 		Mounts: []mount.Mount{
 			{
-				Type:     mount.TypeBind,
-				Source:   dir + "/scripts",
-				Target:   "/scripts",
-				ReadOnly: false,
+				Type:   mount.TypeBind,
+				Source: dir + "/scripts",
+				Target: "/scripts",
+				// ReadOnly: false,
 			},
 		},
 	}
