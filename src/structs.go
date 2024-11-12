@@ -1,4 +1,4 @@
-package main
+package src
 
 var LanguageTypes = map[string]string{
 	"py":   "docker.io/library/python:3.13",    // Python

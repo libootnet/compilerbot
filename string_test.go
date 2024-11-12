@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compilerbot/src"
 	"fmt"
 	"testing"
 )
@@ -15,6 +16,6 @@ func Test_String(t *testing.T) {
 	}
 
 	for _, test_value := range test_values {
-		fmt.Println(reverse(RemoveC(reverse(RemoveC(test_value)))))
+		fmt.Println(src.Reverse(src.RemoveC(src.Reverse(src.RemoveC(test_value)))))
 	}
 }

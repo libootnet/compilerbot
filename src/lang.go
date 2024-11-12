@@ -1,4 +1,4 @@
-package main
+package src
 
 import "strings"
 
@@ -50,7 +50,6 @@ func LanguageSele(split, lang string) (code, language string) {
 		language = "java"
 
 	// php
-
 	case strings.HasPrefix(split, "php"):
 		code = Remove(lang, "php")
 		language = "php"

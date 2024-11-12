@@ -1,7 +1,6 @@
-package main
+package src
 
 import (
-	"compilerbot/src"
 	"crypto/sha256"
 	"fmt"
 	"math/rand/v2"
@@ -34,7 +33,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
-			output, err := src.CreateVM(sha256, LanguageTypes[language], language)
+			output, err := CreateVM(sha256, LanguageTypes[language], language)
 			if err != nil {
 				fmt.Println(err)
 				return

@@ -1,10 +1,10 @@
-package main
+package src
 
 import (
 	"strings"
 )
 
-func reverse(s string) string {
+func Reverse(s string) string {
 	runes := []rune(s)
 	for i, j := 0, len(runes)-1; i < j; i, j = i+1, j-1 {
 		runes[i], runes[j] = runes[j], runes[i]
@@ -45,4 +45,8 @@ func RemoveC(input string) string {
 func Split(value string) string {
 	value = strings.ReplaceAll(value, " ", "")
 	return strings.ReplaceAll(value, "\n", "")
+}
+
+func SplitPrefix(value string) string {
+	return Reverse(RemoveC(Reverse(RemoveC(value))))
 }

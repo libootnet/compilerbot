@@ -1,6 +1,7 @@
 package main
 
 import (
+	"compilerbot/src"
 	"fmt"
 	"os"
 	"os/signal"
@@ -30,7 +31,7 @@ func main() {
 		return
 	}
 
-	dg.AddHandler(MessageContent)
+	dg.AddHandler(src.MessageContent)
 
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
