@@ -16,7 +16,7 @@ func LanguageSele(split, lang string) (code, language string) {
 	case strings.HasPrefix(split, "golang"):
 		code = Remove(lang, "golang")
 		language = "go"
-	case strings.HasPrefix(split, "golang"):
+	case strings.HasPrefix(split, "go"):
 		code = Remove(lang, "go")
 		language = "go"
 
@@ -48,6 +48,12 @@ func LanguageSele(split, lang string) (code, language string) {
 	case strings.HasPrefix(split, "java"):
 		code = Remove(lang, "java")
 		language = "java"
+
+	// php
+
+	case strings.HasPrefix(split, "php"):
+		code = Remove(lang, "php")
+		language = "php"
 	}
 
 	return
