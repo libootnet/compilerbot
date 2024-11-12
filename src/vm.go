@@ -68,13 +68,13 @@ func CreateVM(id, images, extension string) (string, error) {
 				Source: dir + "/scripts",
 				Target: "/scripts",
 			},
-			{
+			/*{
 				Type:   mount.TypeTmpfs,
 				Target: "/tmp",
 				TmpfsOptions: &mount.TmpfsOptions{
 					Mode: 1777,
 				},
-			},
+			},*/
 		},
 	}
 
