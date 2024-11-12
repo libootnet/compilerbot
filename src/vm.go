@@ -59,9 +59,9 @@ func CreateVM(id, images, extension string) (string, error) {
 	}
 
 	hostConfig := &container.HostConfig{
-		NetworkMode:    "none",
-		Privileged:     false,
-		ReadonlyRootfs: true,
+		NetworkMode: "none",
+		Privileged:  false,
+		// ReadonlyRootfs: true,
 		Mounts: []mount.Mount{
 			{
 				Type:   mount.TypeBind,
@@ -72,7 +72,7 @@ func CreateVM(id, images, extension string) (string, error) {
 				Type:   mount.TypeTmpfs,
 				Target: "/go-tmp",
 				TmpfsOptions: &mount.TmpfsOptions{
-					Mode: 1777,
+					Mode: 0777,
 				},
 			},
 		},
