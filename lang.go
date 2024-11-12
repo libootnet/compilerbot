@@ -37,12 +37,12 @@ func LanguageSele(split, lang string) (code, language string) {
 		language = "js"
 
 	// rust
-	case strings.HasPrefix(split, "rust"):
+	/*case strings.HasPrefix(split, "rust"):
 		code = Remove(lang, "rust")
 		language = "rs"
 	case strings.HasPrefix(split, "rs"):
 		code = Remove(lang, "rs")
-		language = "rs"
+		language = "rs"*/
 
 	// java
 	case strings.HasPrefix(split, "java"):
