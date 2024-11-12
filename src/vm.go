@@ -51,11 +51,11 @@ func CreateVM(id, images, extension string) (string, error) {
 		Image: LanguageType(images),
 		Cmd:   command,
 		Tty:   true,
-		Env: []string{
+		/*Env: []string{
 			"GOCACHE=/go-tmp/go-cache",
 			"GOPATH=/go-tmp/go-path",
 			"GOTMPDIR=/go-tmp",
-		},
+		},*/
 	}
 
 	hostConfig := &container.HostConfig{
@@ -70,9 +70,9 @@ func CreateVM(id, images, extension string) (string, error) {
 			},
 			{
 				Type:   mount.TypeTmpfs,
-				Target: "/go-tmp",
+				Target: "/tmp",
 				TmpfsOptions: &mount.TmpfsOptions{
-					Mode: 0777,
+					Mode: 1777,
 				},
 			},
 		},
