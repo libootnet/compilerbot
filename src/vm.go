@@ -65,7 +65,7 @@ func CreateVM(id, images, extension string) (string, error) {
 				Type:     mount.TypeBind,
 				Source:   dir + "/scripts",
 				Target:   "/scripts",
-				ReadOnly: true,
+				ReadOnly: false,
 			},
 		},
 	}
