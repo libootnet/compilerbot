@@ -11,7 +11,7 @@ func Methods(language, path string) []string {
 	case "js":
 		return []string{"node", path}
 	case "rs":
-		return []string{"cargo", "run", path}
+		return []string{"rustc ", path, "&&", "./" + path[:len(path)-3]}
 	case "rb":
 		return []string{"rb", path}
 	case "php":
