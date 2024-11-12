@@ -54,6 +54,7 @@ func CreateVM(id, images, extension string) (string, error) {
 		Env: []string{
 			"GOCACHE=/go-tmp/go-cache",
 			"GOPATH=/go-tmp/go-path",
+			"GOTMPDIR=/go-tmp",
 		},
 	}
 
