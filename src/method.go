@@ -5,7 +5,7 @@ func Methods(language, path string) []string {
 	case "py":
 		return []string{"python", path}
 	case "go":
-		return []string{"sh", "-c", `mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH" && go run /scripts/` + path}
+		return []string{"sh", "-c", `mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 1777 "$GOPATH" && go run ` + path}
 	case "java":
 		return []string{"java", path}
 	case "js":
