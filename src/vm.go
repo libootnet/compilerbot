@@ -55,8 +55,8 @@ func CreateVM(id, images, extension string) (string, error) {
 		Cmd:   command,
 		Tty:   true,
 		Env: []string{
-			"GOCACHE=/tmp/go-cache",
-			"GOPATH=/tmp/go-path",
+			"GOCACHE=/go-tmp/go-cache",
+			"GOPATH=/go-tmp/go-path",
 		},
 	}
 
@@ -72,7 +72,7 @@ func CreateVM(id, images, extension string) (string, error) {
 			},
 			{
 				Type:   mount.TypeTmpfs,
-				Target: "/tmp",
+				Target: "/go-tmp",
 				TmpfsOptions: &mount.TmpfsOptions{
 					Mode: 0777,
 				},
