@@ -72,7 +72,7 @@ func CreateVM(id, images, extension string) (string, error) {
 				Type:   mount.TypeTmpfs,
 				Target: "/go-tmp",
 				TmpfsOptions: &mount.TmpfsOptions{
-					Mode: 0777,
+					Mode: 1777,
 				},
 			},
 		},
