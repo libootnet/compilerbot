@@ -5,7 +5,7 @@ func Methods(language, path string) []string {
 	case "py":
 		return []string{"python", path}
 	case "go":
-		return []string{"go", "run", path}
+		return []string{"sudo", "go", "run", path}
 	case "java":
 		return []string{"java", path}
 	case "js":
