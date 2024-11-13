@@ -11,5 +11,5 @@ var LanguageTypes = map[string]string{
 	"cpp":  "docker.io/library/gcc:latest",     // gcc
 	"cxx":  "docker.io/library/gcc:latest",     // gcc
 	"cc":   "docker.io/library/gcc:latest",     // gcc
-	// "rs":   "docker.io/library/rust:1.80",   // Rust
+	"rs":   "docker.io/library/rust:latest",    // Rust
 }
