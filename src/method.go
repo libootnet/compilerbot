@@ -23,9 +23,9 @@ func Methods(language, path string) []string {
 	case "php":
 		return []string{"php", path}
 	case "c":
-		return []string{"sh", "-c", fmt.Sprintf("gcc %s -o /scripts/%s && ./%s", path, GetBaseName(path), GetBaseName(path))}
+		return []string{"sh", "-c", fmt.Sprintf("gcc %s -o /scripts/%s && ./scripts/%s", path, GetBaseName(path), GetBaseName(path))}
 	case "cpp", "cxx", "cc":
-		return []string{"sh", "-c", fmt.Sprintf("g++ %s -o /scripts/%s && ./%s", path, GetBaseName(path), GetBaseName(path))}
+		return []string{"sh", "-c", fmt.Sprintf("g++ %s -o /scripts/%s && ./scripts/%s", path, GetBaseName(path), GetBaseName(path))}
 	default:
 		return []string{}
 	}
