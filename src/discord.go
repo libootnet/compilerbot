@@ -126,7 +126,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			if len(output) == 0 {
 				output = "null"
-				embed.Fields[0].Value = output
+				embed.Fields[0].Value = "```" + output + "```"
 				s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 				return
 			}
@@ -140,7 +140,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				}
 			}
 
-			embed.Fields[0].Value = output
+			embed.Fields[0].Value = "```" + output + "```"
 
 			_, err = s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 			if err != nil {
