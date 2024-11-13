@@ -16,8 +16,8 @@ func Methods(language, path string) []string {
 		return []string{"java", path}
 	case "js":
 		return []string{"node", path}
-	/*case "rs":
-	return []string{"cargo", "run", "--bin", path}*/
+	case "rs":
+		return []string{"sh", "-c", fmt.Sprintf("cargo new project && cp %s project/src/main.rs && cd project && cargo run", path)}
 	case "rb":
 		return []string{"rb", path}
 	case "php":
