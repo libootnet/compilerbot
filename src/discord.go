@@ -37,7 +37,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			var compileMess = "."
 
-			message, err := s.ChannelMessageSend(m.ChannelID, "```"+"compiling."+"```")
+			message, err := s.ChannelMessageSend(m.ChannelID, "```"+"Processing."+"```")
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -45,10 +45,13 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			ctx, cancel := context.WithCancel(context.Background())
 
+			var is = false
+
 			go func() {
 				for {
 					select {
 					case <-ctx.Done():
+						is = true
 						return
 					default:
 						if len(compileMess) == 5 {
@@ -56,7 +59,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 						}
 						time.Sleep(2 * time.Second)
 						compileMess += "."
-						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```"+"compiling"+compileMess+"```")
+						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```"+"Processing"+compileMess+"```")
 					}
 				}
 			}()
@@ -74,6 +77,11 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 			if err != nil {
 				fmt.Println(err)
 				return
+			}
+
+			for !is {
+				time.Sleep(300 * time.Millisecond)
+				continue
 			}
 
 			s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
