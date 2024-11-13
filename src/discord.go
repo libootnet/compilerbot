@@ -42,7 +42,19 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			var compileMess = "."
 
-			message, err := s.ChannelMessageSend(m.ChannelID, "```"+"Processing."+"```")
+			embed := &discordgo.MessageEmbed{
+				Color:       0x00ff00,
+				Description: language,
+				Fields: []*discordgo.MessageEmbedField{
+					{
+						Name:   "console",
+						Value:  "```" + "Processing." + "```",
+						Inline: true,
+					},
+				},
+			}
+
+			message, err := s.ChannelMessageSendEmbed(m.ChannelID, embed)
 			if err != nil {
 				fmt.Println(err)
 				return
@@ -62,9 +74,12 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 						if len(compileMess) == 6 {
 							compileMess = ""
 						}
+
 						time.Sleep(1 * time.Second)
 						compileMess += "."
-						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```"+"Processing"+compileMess+"```")
+						embed.Fields[0].Value = compileMess
+
+						s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 					}
 				}
 			}()
@@ -92,9 +107,26 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 			output = regexp.MustCompile(`\x1b\[[0-9;]*[a-zA-Z]`).ReplaceAllString(output, "")
 			output = strings.ReplaceAll(output, "`", "\\`")
 
+			embed = &discordgo.MessageEmbed{
+				Color:       0x00ff00,
+				Description: language,
+				Fields: []*discordgo.MessageEmbedField{
+					{
+						Name:   "console",
+						Value:  fmt.Sprintf("```%s```", output),
+						Inline: true,
+					},
+					{
+						Name:   "hash",
+						Value:  sha256,
+						Inline: true,
+					},
+				},
+			}
+
 			if len(output) == 0 {
 				output = "null"
-				s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
+				s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 				return
 			}
 
