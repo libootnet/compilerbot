@@ -97,7 +97,6 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
 				return
 			}
-
 			split := strings.Split(output, "\n")
 
 			if len(split) >= 30 {
