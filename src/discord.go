@@ -51,12 +51,12 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 					case <-ctx.Done():
 						return
 					default:
-						if len(compileMess) == 4 {
-							compileMess = "."
+						if len(compileMess) == 5 {
+							compileMess = ""
 						}
-						time.Sleep(1 * time.Second)
+						time.Sleep(2 * time.Second)
 						compileMess += "."
-						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "compiling"+compileMess)
+						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```"+"compiling"+compileMess+"```")
 					}
 				}
 			}()
