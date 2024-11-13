@@ -88,6 +88,12 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 			output = regexp.MustCompile(`\x1b\[[0-9;]*[a-zA-Z]`).ReplaceAllString(output, "")
 			output = strings.ReplaceAll(output, "`", "\\`")
 
+			if len(output) == 0 {
+				output = "null"
+				s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
+				return
+			}
+
 			s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
 		}
 	}
