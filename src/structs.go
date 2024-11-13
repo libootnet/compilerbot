@@ -7,5 +7,7 @@ var LanguageTypes = map[string]string{
 	"js":   "docker.io/library/node:latest",    // Node.js
 	"rb":   "docker.io/library/ruby:latest",    // Ruby
 	"php":  "docker.io/library/php:latest",     // PHP
+	"gcc":  "docker.io/library/gcc:latest",     // gcc
+	"g++":  "docker.io/library/gcc:latest",     // gcc
 	// "rs":   "docker.io/library/rust:1.80",   // Rust
 }
