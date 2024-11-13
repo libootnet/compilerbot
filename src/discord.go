@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"math/rand/v2"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
@@ -83,6 +84,9 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				time.Sleep(300 * time.Millisecond)
 				continue
 			}
+
+			output = regexp.MustCompile(`\x1b\[[0-9;]*[a-zA-Z]`).ReplaceAllString(output, "")
+			output = strings.ReplaceAll(output, "`", "\\`")
 
 			s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
 		}
