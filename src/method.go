@@ -17,7 +17,8 @@ func Methods(language, path string) []string {
 	case "js":
 		return []string{"node", path}
 	case "rs":
-		return []string{"sh", "-c", fmt.Sprintf("cargo new project && cp %s project/src/main.rs && cd project && cargo run", path)}
+		// debug in rust language
+		return []string{"sh", "-c", fmt.Sprintf("cargo new project && cp %s project/src/main.rs && cd project && cargo run --release > result.log 2>&1 && tail -n 10 result.log", path)}
 	case "rb":
 		return []string{"rb", path}
 	case "php":
