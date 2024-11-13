@@ -103,7 +103,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				}
 			}
 
-			_, err = s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
+			_, err = s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```\n%s```", output))
 			if err != nil {
 				fmt.Println(err)
 				s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```To many Requests```")
