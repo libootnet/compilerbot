@@ -77,7 +77,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 						time.Sleep(1 * time.Second)
 						compileMess += "."
-						embed.Fields[0].Value = "Processing" + compileMess
+						embed.Fields[0].Value = "```" + "Processing" + compileMess + "```"
 
 						s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 					}
@@ -114,12 +114,12 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 					{
 						Name:   "console",
 						Value:  fmt.Sprintf("```%s```", output),
-						Inline: true,
+						Inline: false,
 					},
 					{
 						Name:   "hash",
 						Value:  sha256,
-						Inline: true,
+						Inline: false,
 					},
 				},
 			}
