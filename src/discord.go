@@ -40,6 +40,8 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
+			sha256 = sha256[:20]
+
 			var compileMess = "."
 
 			message, err := s.ChannelMessageSend(m.ChannelID, "```"+"Processing."+"```")
@@ -97,6 +99,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
 				return
 			}
+
 			split := strings.Split(output, "\n")
 
 			if len(split) >= 30 {
