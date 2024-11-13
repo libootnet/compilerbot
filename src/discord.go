@@ -77,7 +77,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 						time.Sleep(1 * time.Second)
 						compileMess += "."
-						embed.Fields[0].Value = compileMess
+						embed.Fields[0].Value = "Processing" + compileMess
 
 						s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 					}
@@ -139,10 +139,11 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				}
 			}
 
-			_, err = s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```\n%s```", output))
+			_, err = s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 			if err != nil {
 				fmt.Println(err)
-				s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```To many Requests```")
+				embed.Fields[0].Value = "```To many Requests```"
+				s.ChannelMessageEditEmbed(message.Reference().ChannelID, message.Reference().MessageID, embed)
 				return
 			}
 		}
