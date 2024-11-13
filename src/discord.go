@@ -40,8 +40,6 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
-			sha256 = sha256[:20]
-
 			var compileMess = "."
 
 			message, err := s.ChannelMessageSend(m.ChannelID, "```"+"Processing."+"```")
@@ -121,12 +119,13 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 func CompilerWrite(value, dot string) (string, error) {
 	sha256 := sha256.Sum256([]byte(fmt.Sprintf("%d", rand.IntN(1000))))
-	file, err := os.Create(fmt.Sprintf("./scripts/%x.%s", sha256, dot))
+	code := fmt.Sprintf("%x", sha256)[:20]
+	file, err := os.Create(fmt.Sprintf("./scripts/%s.%s", code, dot))
 	if err != nil {
 		return "", err
 	}
 	file.Write([]byte(value))
 	file.Close()
 
-	return fmt.Sprintf("%x", sha256), nil
+	return code, nil
 }
