@@ -30,6 +30,10 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 			code, language := LanguageSele(split, lang)
 
+			if language == "" || code == "" {
+				return
+			}
+
 			sha256, err := CompilerWrite(code, language)
 			if err != nil {
 				fmt.Println(err)
