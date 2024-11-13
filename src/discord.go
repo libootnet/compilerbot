@@ -1,11 +1,13 @@
 package src
 
 import (
+	"context"
 	"crypto/sha256"
 	"fmt"
 	"math/rand/v2"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -33,11 +35,40 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
-			output, err := CreateVM(sha256, LanguageTypes[language], language)
+			var compileMess = "."
+
+			message, err := s.ChannelMessageSend(m.ChannelID, "```"+"compiling."+"```")
 			if err != nil {
 				fmt.Println(err)
 				return
 			}
+
+			ctx, cancel := context.WithCancel(context.Background())
+
+			go func() {
+				for {
+					select {
+					case <-ctx.Done():
+						return
+					default:
+						if len(compileMess) == 4 {
+							compileMess = "."
+						}
+						time.Sleep(1 * time.Second)
+						compileMess += "."
+						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "compiling"+compileMess)
+					}
+				}
+			}()
+
+			output, err := CreateVM(sha256, LanguageTypes[language], language)
+			if err != nil {
+				fmt.Println(err)
+				cancel()
+				return
+			}
+
+			cancel()
 
 			err = os.Remove(fmt.Sprintf("./scripts/%s.%s", sha256, language))
 			if err != nil {
@@ -45,7 +76,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
-			s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("```%s```", output))
+			s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, fmt.Sprintf("```%s```", output))
 		}
 	}
 }
