@@ -22,9 +22,9 @@ func Methods(language, path string) []string {
 		return []string{"rb", path}
 	case "php":
 		return []string{"php", path}
-	case "gcc":
+	case "c":
 		return []string{"sh", "-c", fmt.Sprintf("gcc %s && ./%s", path, GetBaseName(path))}
-	case "g++":
+	case "cpp", "cxx", "cc":
 		return []string{"sh", "-c", fmt.Sprintf("g++ %s && ./%s", path, GetBaseName(path))}
 	default:
 		return []string{}
