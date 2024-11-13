@@ -54,10 +54,10 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 						is = true
 						return
 					default:
-						if len(compileMess) == 5 {
+						if len(compileMess) == 6 {
 							compileMess = ""
 						}
-						time.Sleep(2 * time.Second)
+						time.Sleep(1 * time.Second)
 						compileMess += "."
 						s.ChannelMessageEdit(message.Reference().ChannelID, message.Reference().MessageID, "```"+"Processing"+compileMess+"```")
 					}

@@ -82,7 +82,7 @@ func CreateVM(id, images, extension string) (string, error) {
 	// fmt.Println(resp.ID)
 
 	statusCh, errCh := cli.ContainerWait(ctx, resp.ID, container.WaitConditionNotRunning)
-	timeoutCh := time.After(30 * time.Second)
+	timeoutCh := time.After(20 * time.Second)
 
 	var errWait error
 	var timeout bool
