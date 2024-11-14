@@ -84,7 +84,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				}
 			}()
 
-			output, err := CreateVM(sha256, LanguageTypes[language], language)
+			output, exitcode, err := CreateVM(sha256, LanguageTypes[language], language)
 			if err != nil {
 				fmt.Println(err)
 				cancel()
@@ -108,7 +108,7 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 			output = strings.ReplaceAll(output, "`", "\\`")
 
 			embed = &discordgo.MessageEmbed{
-				Color:       0x00ff00,
+				Color:       StatusColor(exitcode),
 				Description: language,
 				Fields: []*discordgo.MessageEmbedField{
 					{
@@ -150,6 +150,14 @@ func MessageContent(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 		}
+	}
+}
+
+func StatusColor(color int) int {
+	if color != 0 {
+		return 0xff0000
+	} else {
+		return 0x00ff00
 	}
 }
 
